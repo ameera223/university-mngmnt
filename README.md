@@ -6,23 +6,43 @@ This project implements a simple University Management System using PostgreSQL. 
 .
 ├── university_management_system.sql  # Full SQL script
 └── README.md                         # Project documentation
+
 🧱 Schema Overview
-The system includes the following tables:
+ER Diagram 
+[departments]
+- department_id (PK)
+- name (UNIQUE, NOT NULL)
 
-Table	Description
-departments	Stores department details
-professors	Stores professor information
-students	Stores student information
-courses	Stores course information linked to professors and departments
+[professors]
+- professor_id (PK)
+- name (NOT NULL)
+- email (UNIQUE)
+- salary
+- department_id (FK → departments.department_id)
 
-🔄 Relationships
-Each department can have multiple professors, students, and courses.
+[students]
+- student_id (PK)
+- name (NOT NULL)
+- email (UNIQUE)
+- enrollment_year (>= 2000)
+- department_id (FK → departments.department_id)
 
-Each course is taught by one professor and belongs to one department.
+[courses]
+- course_id (PK)
+- title (NOT NULL)
+- credits (> 0)
+- department_id (FK → departments.department_id)
+- professor_id (FK → professors.professor_id)
 
-📥 How to Use
-🛠 Prerequisites
-PostgreSQL installed
+  
+Relationships
+A Department has many Professors, Students, and Courses.
+
+A Professor teaches many Courses.
+
+A Course belongs to one Department and is taught by one Professor.
+
+A Student belongs to one Department.
 
 📌 Features Implemented
 ✅ Relational Schema with Constraints
